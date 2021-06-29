@@ -1100,6 +1100,8 @@ Promise.myAll = function(promises) {
 
 ## 82.  前端数据怎么做持久化
 
+> ​		vuex可以进行全局的状态管理，但刷新后刷新后数据会消失。
+
 - localStorage存储数据
 - vuex-persistedstate插件
 - 使用vue-cookie插件操作cookie
@@ -1155,3 +1157,24 @@ Promise.myAll = function(promises) {
 - 如何解决队头阻塞：
   - 对于HTTP1.1的管道化导致的请求、响应级别的队头阻塞，可以使用HTTP2.0不使用管道化的方式，而是引入帧、消息和数据流等概念。每个请求/响应被称为消息，每个消息都被拆分成若干个帧进行传输，每个帧都分配一个序号。每个帧在传输是属于一个数据流，而一个连接上可以存在多个流，各个帧在流和连接上独立传输，到达之后在组装成消息，这样就避免了请求/响应阻塞。
   - 对于TCP队头阻塞，是由于TCP的特点决定的，无法避免。只能舍弃TCP，比如Google的quic协议，在UDP的基础上实现了可靠传输，UDP是面向数据报的，数据报之间不会有阻塞约束。
+
+## 88. IFC
+
+> - FC的含义就是Fomatting Context。它是CSS2.1规范中的一个概念。
+> - 它是页面中的一块渲染区域。而且有一套渲染规则，它决定了其子元素将怎样定位。以及和其它元素的关系和相互作用。
+> - BFC和IFC都是常见的FC。分别叫做Block Fomatting Context 和Inline Formatting Context。
+
+- 布局规则如下：
+  - 内部的盒子会在水平方向，一个个地放置；
+  - IFC的高度，由里面最高盒子的高度决定；
+  - 当一行不够放置的时候会自动切换到下一行；
+- 用处
+  - 水平居中：当一个块要在环境中水平居中时候，设置其为inline-block则会在外层产生IFC，通过text-align:center则可以使其水平居中。
+  - 垂直居中：创建一个IFC，用其中一个元素撑开父元素的高度，然后设置其vertical-align:middle,其他行内元素则可以在此父元素下垂直居中。
+
+## 89. 简单请求和预检请求
+
+​		总体来说，不会对服务器产生副作用的请求称为简单请求。
+
+- 简单请求满足以下两个条件：HEAD请求、GET请求以及部分POST请求。这一部分的POST请求是指Content-type为text/plain、multipart/form-data或者application、x-www-form-unlencoded。
+- 非简单请求是除了简单请求的请求，每次发送非简单请求的时候，都会向服务器先发送一个不带body的预检请求（使用options方法），从而获知服务端是否允许该跨域请求。服务器确认允许之后，才发起实际的 HTTP 请求。在预检请求的返回中，服务器端也可以通知客户端，是否需要携带身份凭证（包括 [Cookies ](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Cookies)和 HTTP 认证相关数据）。
