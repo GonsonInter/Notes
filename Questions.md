@@ -1173,3 +1173,10 @@ Promise.myAll = function(promises) {
   - 垂直居中：创建一个IFC，用其中一个元素撑开父元素的高度，然后设置其vertical-align:middle,其他行内元素则可以在此父元素下垂直居中。
 
 - 身份凭证（包括 [Cookies ](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Cookies)和 HTTP 认证相关数据）。
+
+## 89. 简单请求和预检请求
+
+​		总体来说，不会对服务器产生副作用的请求称为简单请求。
+
+- 简单请求满足以下两个条件：HEAD请求、GET请求以及部分POST请求。这一部分的POST请求是指Content-type为text/plain、multipart/form-data或者application、x-www-form-unlencoded。
+- 非简单请求是除了简单请求的请求，每次发送非简单请求的时候，都会向服务器先发送一个不带body的预检请求（使用options方法），从而获知服务端是否允许该跨域请求。服务器确认允许之后，才发起实际的 HTTP 请求。在预检请求的返回中，服务器端也可以通知客户端，是否需要携带身份凭证（包括 [Cookies ](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Cookies)和 HTTP 认证相关数据）。
