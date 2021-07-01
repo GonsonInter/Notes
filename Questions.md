@@ -1190,3 +1190,47 @@ Promise.myAll = function(promises) {
 - 在HTML中引入cdn第三方库
 - 在webpack中配置externals
 - 在js中引用
+
+## 91. Vue和React
+
+### （1） 相似之处
+
+- **Virtual DOM**：一个映射真实DOM的JavaScript对象，如果需要改变任何元素的状态，那么是先在Virtual DOM上进行改变，而不是直接改变真实的DOM。当有变化产生时，一个新的Virtual DOM对象会被创建并计算新旧Virtual DOM之间的差别。之后这些差别会应用在真实的DOM上。 
+- **组件化**：将应用分拆成一个个功能明确的模块，每个模块之间可以通过合适的方式互相联系。
+- **props**：是properties的简写，允许父组件向子组件传递数据。
+- **构建工具**：都有自己的构建工具，可以用来快速搭建环境。
+- **都只专注UI层**：两个框架都只关注UI，而其他的功能如路由、状态管理等都交给同伴框架进行处理。
+
+### （2） 主要区别
+
+- **模板和JSX**：Vue使用HTML模板，比较贴合传统的前端开发者。React使用JSX来完成DOM的编写，
+
+- **状态管理和对象管理**：React中，state状态是核心概念，它是不可手动更改的，只有通过setState才能更新状态，并且更新UI。在Vue中数据通过data等进行管理。
+- **数据流**：Vue设计理念是双向绑定，React提倡数据单向流动。
+
+- **框架类型**：Vue是MVVM框架，其来源于MVC模式。React是组件化框架，是由后端组简化演化来的。
+
+## 92. HMR
+
+### （1） 启用
+
+​		只需要在 `webpack.config.js` 中添加 `devServer` 选项，并设置 `hot` 值为 `true` ，并使用`HotModuleReplacementPlugin` 和 `NamedModulesPlugin` （可选）两个 Plugins ：
+
+```javascript
+devServer: {
+	hot: true,   // 启动模块热更新 HMR
+    open: true,  // 开启自动打开浏览器页面
+},
+plugins: [
+  	new webpack.NamedModulesPlugin(),
+    new webpack.HotModuleReplacementPlugin()
+]
+```
+
+​		然后使用webpack-dev-derver打开项目。
+
+### （2） 原理
+
+​		https://segmentfault.com/a/1190000022485386
+
+​		https://www.codercto.com/a/90387.html
