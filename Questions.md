@@ -1167,3 +1167,4 @@ Promise.myAll = function(promises) {
 - 在js中引用
 
 ## 89. 
+
