@@ -1300,3 +1300,44 @@ plugins: [
 - 对于QQ登录：首先使用HTTP协议，登录，会有一个TCP协议来保持登陆状态。（无论是TCP登录还是UDP登录）；
 - 对于聊天消息：采用UDP协议，通过服务器中转的方式，因此在仅聊天的时候IP侦探是无法获取到IP的。腾讯采用上层协议来保障可靠传输，如果客户端使用UDP协议发出消息后，服务器收到该包，需要使用UDP协议发回一个应答包。
 - 对于文件和自定义表情：自定义表情是以文字的方式进行传输的。传文件要使用TCP协议。
+
+## 97. 文件下载如何实现
+
+- 第一种，直接下载服务器的资源，使用a标签给href，其他的方法比如form、iframe、location.href、window.open()也一样；
+
+- 前端传参：前端通过发送数据或参数传给后端，再由后端根据接收到的数据生成文件，或根据参数查找出对应文件，最后在响应头中设置，
+
+  `Content-disposition：attachment；filename="fliename.fileType"`
+
+  浏览器接受到这个响应头就会触发下载行为。
+
+- 对于已知文件内容的，比如后端传来的文件里的内容，可以使用`URL.createObjectURL()`下载文件，这个方法支持传入file对象、blob对象或者MediaSource对象（媒体资源）。添加a标签用js触发点击后将a标签删除。
+
+## 98. 解决vuex刷新清除的问题
+
+- 手动：将vuex中的state用sessionStorage存储起来，刷新后还原：
+
+```js
+// store的写法
+const store = new Vuex.Store({
+    state:sessionStorage.getItem('state') ? JSON.parse(sessionStorage.getItem('state')): {
+        //id
+        skillId:'',
+        //技能状态
+        checkStatus:''
+    }
+})
+
+// App.vue中添加
+		mounted() {
+            window.addEventListener('unload', this.saveState)
+        },
+        methods: {
+            saveState() {
+                sessionStorage.setItem('state',JSON.stringify(this.$store.state))
+            }
+        }
+```
+
+- 利用vuex-persistedstate插件
+
