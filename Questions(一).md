@@ -1341,3 +1341,23 @@ const store = new Vuex.Store({
 
 - 利用vuex-persistedstate插件
 
+## 99. window.getComputedStyle和style
+
+- 前者只读，后者可读写；
+
+- 获取的范围不一样，前者获取的是最终应用到元素上的样式值，而后者只能获取到元素内联样式的css样式。
+
+  >  因此对于一个光秃秃的元素<p>，getComputedStyle方法返回对象中length属性值（如果有）就是190+(据我测试FF:192, IE9:195, Chrome:253, 不同环境结果可能有差异), 而element.style就是0。
+
+- 前者是个方法，能够获取到元素的伪元素的样式，而后者不行。
+
+```js
+var h3 = document.querySelector('h3');
+var result = getComputedStyle(h3, ':after').content;
+```
+
+## 100. url编码
+
+- 为什么要编码：HTTP协议中参数组件的传输是“key=value”键值对的形式，如果要传输多个参数就需要用“&”符号对键值对进行分隔。如果参数中本身就含有url保留字，服务端就会产生歧义，因此需要对url进行编码来消除歧义；
+- 如何编码：在特殊字符的各个字节（16进制）前加上“%”即可。
+
