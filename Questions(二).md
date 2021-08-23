@@ -306,6 +306,13 @@ function fetchImageWithLimit(imageUrls, limit) {
 
 ## 25. ES6的class和ES5的构造函数
 
+- ES6定义的方法在原型链上，但是这些方法不可枚举；
+- ES6中是严格模式，方法或类中的this本来是指向对象，单独使用指向undefined；
+- ES6类由于是严格模式，不存在变量提升，保证子类父类的顺序；
+- ES6中当函数用new关键词的时候，增加了new.target属性来判断当前调用的构造函数；
+- ES6 class虽然是语法糖，但是不能不使用new直接调用；
+- ES6 class必须先定义后使用，ES5可以先使用后定义。
+
 ## 26. Tree-Shaking、Webpack treeshaking是如何处理的
 
 ## 27. Serverless
