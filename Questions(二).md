@@ -315,11 +315,15 @@ function fetchImageWithLimit(imageUrls, limit) {
 
 ## 26. Tree-Shaking、Webpack treeshaking是如何处理的
 
+​		Tree shaking 是一种通过清除多余代码方式来优化项目打包体积的技术，专业术语叫 Dead code elimination。虽然 `tree shaking` 的概念在 1990 就提出了，但直到 `ES6` 的 `ES6-style` 模块出现后才真正被利用起来。因为 import 是完全静态的，因此可以进行静态分析，在编译的时候就知道哪些模块和变量未被使用。
+
 ## 27. Serverless
 
 ## 28. 谈谈对CDN的理解（包括第一次的具体流程）
 
 ## 29. QUIC协议
+
+
 
 ## 30. TCP粘包问题
 
