@@ -321,7 +321,7 @@ function fetchImageWithLimit(imageUrls, limit) {
 
 ## 28. 谈谈对CDN的理解（包括第一次的具体流程）
 
-## 29. QUIC协议
+## 29. QUIC协议、HTTP3
 
 
 
