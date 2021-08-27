@@ -319,11 +319,19 @@ function fetchImageWithLimit(imageUrls, limit) {
 
 ## 27. Serverless
 
-## 28. 谈谈对CDN的理解（包括第一次的具体流程）
+## 28. CDN
 
 ## 29. QUIC协议、HTTP3
 
+- Quic概述：相比于 http2+tcp+tls 协议有如下优势：
 
+  - 减少了 TCP 三次握手及 TLS 握手时间。
+  - 改进的拥塞控制。
+  - 避免队头阻塞的多路复用。
+  - 连接迁移。
+  - 前向冗余纠错。
+
+  
 
 ## 30. TCP粘包问题
 
@@ -335,12 +343,24 @@ function fetchImageWithLimit(imageUrls, limit) {
 - 以指定字符（串）作为包的结束标志：这种比较常见；
 - 固定长度的包头+包体格式：包头大小固定，其中包含一个字段指定包体的长度。
 
-## 31. bitmap
+## 31. bitmap、布隆过滤器
 
 ## 32. Vue-cli的常见优化
 
 ​		vue-cli依托于webpack，因此优化是基于webpack的。
 
 - 配置某些包使用CDN，主要借助`html-webpack-plugin`这个插件以及`webpack externals`这个属性。
-
 - 使用splitChunks进行代码分割：
+  - 配置多入口可以进行代码分割，每个入口分一个；
+  - 动态导入，使用  import  函数加载的模块将独立打包；
+  - 使用`splitCode`插件
+
+- 所有的库按需引入而不是全局引入
+
+- 启用`gzip`压缩：gzip 是需要服务端配置的，当开启时会压缩我们的线上代码，但是如果我们前端已经使用 gzip 压缩过，那么服务端就会直接使用已经压缩好的代码，就不需要花时间再去压缩了。前端启用 gzip 压缩，使用到的插件是 `CompressionWebpackPlugin`；
+
+- `DllPlugin` 插件 抽离第三方库的包，然后通过script 引入 ；
+
+- 配置`webpack`压缩`js、css、img`等资源文件，分别有`uglifyjs-webpack-plugin`、`optimize-css-assets-webpack-plugin`。对图片可以直接用`url-loader`或者配合使用`image-webpack-loader`插件。
+
+  
