@@ -335,5 +335,12 @@ function fetchImageWithLimit(imageUrls, limit) {
 - 以指定字符（串）作为包的结束标志：这种比较常见；
 - 固定长度的包头+包体格式：包头大小固定，其中包含一个字段指定包体的长度。
 
-## 31. 几十亿量级的数字数据，怎么去找是否存在某个数。（开放题，不过后面提示了bitmap和布隆过滤）
+## 31. bitmap
 
+## 32. Vue-cli的常见优化
+
+​		vue-cli依托于webpack，因此优化是基于webpack的。
+
+- 配置某些包使用CDN，主要借助`html-webpack-plugin`这个插件以及`webpack externals`这个属性。
+
+- 使用splitChunks进行代码分割：
