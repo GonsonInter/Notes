@@ -363,4 +363,16 @@ function fetchImageWithLimit(imageUrls, limit) {
 
 - 配置`webpack`压缩`js、css、img`等资源文件，分别有`uglifyjs-webpack-plugin`、`optimize-css-assets-webpack-plugin`。对图片可以直接用`url-loader`或者配合使用`image-webpack-loader`插件。
 
-  
+
+## 33. 常见的资源类型
+
+​		HTTP header 字段中 Accept 表示客户端可支持的数据类型（Content-Type），如text/css, application/json， 这些类型都是以`MIME`规格定义的数据类型来表示的， 统称为`MIME`类型。
+
+​		`MIME: Multipurpose Internet Mail Extensions`，多用途互联网邮件拓展。常见的`MIME`类型：text/plain，text/html，image/jpeg，image/png，audio/mpeg，audio/ogg，audio/\*，video/mp4，application/*，application/json。application/javascript，application/ecmascript，application/octet-stream。
+
+​		`MIME`完整列表：https://www.iana.org/assignments/media-types/media-types.xhtml
+
+## 34. THREEJS对象的拾取
+
+- 一种是`raycast`射线拾取：是基于几何相交性计算的方式，从鼠标点击的地方，沿着视角方向发射一条射线。通过射线与三维模型的几何香蕉性来判断物体是否被拾取到。THREEJS内置了`Raycast`的类，提供一个射线，可以根据不同方向去发射射线，根据射线是否被阻挡来判断是否碰到了物体。
+  - 一种是基于`GPU`的拾取方式：一般做法是给每个`mesh`一种颜色，然后绘制一遍，在鼠标所在的位置调用`readPicel`读取像素颜色，根据颜色和模型的对应关系，反推当前拾取的`Mesh`。
