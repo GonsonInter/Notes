@@ -272,7 +272,7 @@ class Counter extends React.Component {
   - 传递数据：给组件的标签添加属性；
   - 接收数据：函数组件通过参数props接收数据，类组件通过this.props接受数据。
 
-  ![image-20210630205712670](C:\Users\zijiewang\AppData\Roaming\Typora\typora-user-images\image-20210630205712670.png)
+  ![image-20210630205712670](.\imgs\image-20210630205712670.png)
 
 - props的特点：
   - 可以给组件传递任意类型的数据；
@@ -312,7 +312,7 @@ class Counter extends React.Component {
 
   - 调用Consumer组件接收数据：
 
-    ![image-20210630213455240](C:\Users\zijiewang\AppData\Roaming\Typora\typora-user-images\image-20210630213455240.png)
+    ![image-20210630213455240](.\imgs\image-20210630213455240.png)
 
 
 
@@ -331,11 +331,11 @@ class Counter extends React.Component {
     - 使用**组件名.propTypes = {}**给组件的props添加校验规则；
     - 校验规则通过PropTypes对象来指定。
 
-![image-20210701102630888](C:\Users\zijiewang\AppData\Roaming\Typora\typora-user-images\image-20210701102630888.png)
+![image-20210701102630888](.\imgs\image-20210701102630888.png)
 
 - - 常见的约束规则：
 
-    ![image-20210701103207184](C:\Users\zijiewang\AppData\Roaming\Typora\typora-user-images\image-20210701103207184.png)
+    ![image-20210701103207184](.\imgs\image-20210701103207184.png)
 
     全部类型可查文档：https://reactjs.org/docs/typechecking-with-proptypes.html
 
@@ -351,26 +351,26 @@ class Counter extends React.Component {
 > - 钩子函数为开发人员在不同阶段操作组件提供了时机。
 > - **只有类组件才有生命周期**，因为函数组件没有状态，是静态的。
 
-![image-20210701111108802](C:\Users\zijiewang\AppData\Roaming\Typora\typora-user-images\image-20210701111108802.png)
+![image-20210701111108802](.\imgs\image-20210701111108802.png)
 
 - 创建挂载时期：
 
-  ![image-20210701111631352](C:\Users\zijiewang\AppData\Roaming\Typora\typora-user-images\image-20210701111631352.png)
+  ![image-20210701111631352](.\imgs\image-20210701111631352.png)
 
 - 组件运行时期：
 
   - 更新执行的时机：1.setState	2.forceUpdate	3.组件接收到新的props
   - 以上三种任意变化组件就会重新渲染。
 
-  ![image-20210701111933928](C:\Users\zijiewang\AppData\Roaming\Typora\typora-user-images\image-20210701111933928.png)
+  ![image-20210701111933928](.\imgs\image-20210701111933928.png)
 
 - 组件卸载时期：
 
   - 执行时机：组件从页面消失。
 
-  ![image-20210701112116071](C:\Users\zijiewang\AppData\Roaming\Typora\typora-user-images\image-20210701112116071.png)
+  ![image-20210701112116071](.\imgs\image-20210701112116071.png)
 
 - 一些不常用的钩子函数：
 
-![image-20210701112304171](C:\Users\zijiewang\AppData\Roaming\Typora\typora-user-images\image-20210701112304171.png)
+![image-20210701112304171](.\imgs\image-20210701112304171.png)
 
