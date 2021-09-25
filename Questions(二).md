@@ -258,7 +258,7 @@ router.get('/sse', (req, res, next)=> {
 ```js
 function fetchImageWithLimit(imageUrls, limit) {
   // copy一份，作为剩余url的记录
-  let urls =[ ...imageUrls ]
+  let urls = [ ...imageUrls ]
 
   // 用来记录url - response 的映射
   // 保证输出列表与输入顺序一致
@@ -391,6 +391,61 @@ function fetchImageWithLimit(imageUrls, limit) {
 
 ​		注意，如果没有写top、bottom、left、right，那么元素会待在他原来的位置。同时有top和bottom时，top的优先级最高，同时有left和right以left优先级高。
 
-## 37. token是怎么生成的
+## 37. session机制和token机制
 
-## 38. 超大文件的断点续传
+- session机制：在服务器存储一份用户登录的信息，并且客户端通过cookie来验证来自哪个用户，并且得到部分用户信息。随着客户端用户的不断增加，独立的服务器无法承载更多的用户，session机制暴露出来一系列问题；
+- 基于session认证暴露的问题：
+  - 每个session要占用内存，服务端开销变大；
+  - 拓展性差：服务端做认证记录，如果认证的记录被保存在服务端内存中，则意味着用户下一次还必须得请求这台服务器，才能拿到授权资源，这样在分布式的应用上，相应地限制了负载均衡的能力；
+  - CSRF攻击：如果cookie被截获，那么用户会很容易收到跨站请求伪造攻击。
+- 基于token的鉴权机制：不需要在服务端保存用户的登录信息这样就不需要考虑用户在那一台服务器登录，token存储在客户端，每次请求带上，服务端根据这个token来鉴权。
+
+## 38. token的生成——JWT（JSON Web Toekn）
+
+​		JWT是由三段信息构成的，将这三段信息文本用`.`链接一起就构成了Jwt字符串。
+
+```jwt
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWV9.TJVA95OrM7E2cBab30RMHrHDcEfxjoYZgeFONFh7HgQ
+```
+
+- JWT的构成：头部（header），载荷（payload），签证（signature）。
+
+  - 头部承载两部分信息：声明类型，声明加密的算法：
+
+    ```json
+    {
+        'typ': 'jwt',
+        'alg': 'HS256'
+    }
+    ```
+
+    然后对头部进行base64加密。
+
+  - payload是存放有效信息的地方：标注中注册的声明，公共的声明，私有的声明：
+
+    ```json
+    {
+      "sub": "1234567890",
+      "name": "John Doe",
+      "admin": true
+    }
+    ```
+
+    然后用base64加密
+
+  - signature是签证信息，这个部分需要base64加密后的header和base64加密后的payload使用.连接组成的字符串，然后通过header中声明的加密方式进行加盐secret组合加密，然后就构成了jwt的第三部分。
+
+## 39. 超大文件的断点续传
+
+## 40. vite为什么这么快
+
+- ES module减少了启动服务器的时间：由于现代浏览器大多数都支持ES module的语法，所以在开发，我们就不必要对其进行打包，这节省了大量的服务器启动时间。另外，vite 按需加载当前页面的所需文件，一个文件是一个http请求，进一步减少启动时间。
+- 缓存减少页面更新的时间：每个文件通过http头缓存在浏览器端，当编辑完一个文件，只需要让文件的缓存失效。当基于 ES module 进行热更新时，仅需更新失效的模块，这使得更新时间不随包的增大而增大。
+
+## 41. ESModule和CommonJs的区别
+
+- CommonJs是被加载的时候运行，esModule是编译的时候运行；
+- commonJs输出的值是浅拷贝，esModule输出的是引用；
+
+- commentJs具有缓存。在第一次被加载时，会完整运行整个文件并输出一个对象，拷贝（浅拷贝）在内存中。下次加载文件时，直接从内存中取值；
+

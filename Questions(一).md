@@ -282,7 +282,7 @@ server {
 - toString
 
   ```js
-  let arr1 = arr.toString().split(',').map(val => parsInt(val));
+  let arr1 = arr.toString().split(',').map(val => parseInt(val));
   ```
 
 - reduce实现
