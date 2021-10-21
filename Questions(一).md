@@ -328,7 +328,7 @@ server {
 ```js
 Object.defineProperty(obj, key, {
     set(newVal) {
-        if (value !=== newVal) {
+        if (value !== newVal) {
             value = newVal;
         	// dep.notify();
         }
