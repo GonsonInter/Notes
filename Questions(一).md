@@ -53,7 +53,7 @@ let q = BigInt(13212);
     (function(i) {
       setTimeout(function() {
         console.log(i + " ");
-      }, 100);
+      }, 1000 * i);
     })(i);
   }
   ```
